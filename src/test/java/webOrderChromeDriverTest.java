@@ -18,8 +18,8 @@ public class webOrderChromeDriverTest {
 	@Test
 	void testSeleniumWebDriver() throws InterruptedException {
 		driver.get("https://www.google.com/");
-		String currentUrl = driver.getCurrentUrl();
-		Assertions.assertEquals("https://www.google.com/", currentUrl);
+		String currentUrl1 = driver.getCurrentUrl();
+		Assertions.assertEquals("https://www.google.com/", currentUrl1);
 
 	}
 
