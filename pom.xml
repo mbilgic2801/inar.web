@@ -14,11 +14,13 @@
    <junit.version>5.10.1</junit.version>
  </properties>
     <dependencies>
+        <!-- Selenium -->
 	<dependency>
 		<groupId>org.seleniumhq.selenium</groupId>
 		<artifactId>selenium-java</artifactId>
 		<version>4.16.1</version> <!-- Replace with the latest version-->
 	</dependency>
+        <!-- JUnit -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -63,7 +65,18 @@
                     <!-- Specific configuration for JUnit 5. -->
                     <useModulePath>false</useModulePath>
                     <includes>
-                        <include>**/*Test.java</include>
+                        <include>**/*WO_001_LP_01.java</include>
+                        <include>**/*WO_002_LP_02.java</include>
+                        <include>**/*WO_003_LP_03.java</include>
+                        <include>**/*WO_004_CF_01.java</include>
+                        <include>**/*WO_005_CF_02.java</include>
+                        <include>**/*WO_006_OP_01.java</include>
+                        <include>**/*WO_007_OP_02.java</include>
+                        <include>**/*WO_008_OP_03.java</include>
+                        <include>**/*WO_009_OP_04.java</include>
+                        <include>**/*WO_010_VAO_01.java</include>
+                        <include>**/*WO_011_VAO_02.java</include>
+                        <include>**/*WO_012_VAO_03.java</include>
                     </includes>
                 </configuration>
             </plugin>
