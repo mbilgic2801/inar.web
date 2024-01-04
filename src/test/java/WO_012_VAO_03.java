@@ -16,15 +16,16 @@ import java.util.List;
 2-) Click "WebOrder" button on top bar.
 3-) Enter valid username "Inar" and password "Academy".
 4-) Navigate to the view all order page.
-5-) Click "Add More Data" "4" times.
-6-) Click "Check All" button.
-7-) Verify all orders selected.
+5-) Click "Add More Data" "8" times.
+6-) Click 1st, 3rd and 5th orders checkbox's.
+7-) Click "Delete All" button.
+8-) Verify the orders are deleted.
  */
-public class WO_010_VAO_01 extends Hooks{
-    List<String> orderInformation = new ArrayList<>();
-
+public class WO_012_VAO_03 extends Hooks{
     @Test
-    void testCheckAllFunctionalityInViewAllOrderPage() throws InterruptedException {
+    void testDeleteFunctionalityInViewAllOrderPage() throws InterruptedException {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
         // 2-) Click "WebOrder" button on top bar.
         WebElement webOrderLink = driver.findElement(By.xpath("//a[@href='/weborder']"));
         webOrderLink.click();
@@ -48,36 +49,33 @@ public class WO_010_VAO_01 extends Hooks{
         WebElement orderTabLink = driver.findElement(By.cssSelector("#view-orders-tab > a"));
         orderTabLink.click();
 
-        //5-) Click "Add More Data" "4" times.
+        //5-) Click "Add More Data" "8" times.
         WebElement addMoreItemButton = driver.findElement(By.cssSelector(".fs-4.btn.btn-primary.text-fifth.me-3"));
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 8; i++) {
             addMoreItemButton.click();
-            Thread.sleep(1000);
         }
-        //6-) Click "Check All" button.
-        WebElement checkAllButton = driver.findElement(By.xpath("//button[@class='btn btn-success fs-4 text-fifth me-3']"));
-        checkAllButton.click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
-        //7-) Verify all orders selected.
+        //6-) Click 1st, 3rd and 5th orders checkbox's.
         List<WebElement> checkboxes = driver.findElements(By.cssSelector("input[type='checkbox']"));
-        int checkedCheckboxCount = 0;
-        for (WebElement checkbox : checkboxes) {
-            if (checkbox.isSelected()) {
-                System.out.println(checkbox.getText());
-                checkedCheckboxCount++;
+        List<WebElement> Rows = driver.findElements(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[12]/span[1]"));
+
+        for (int i = 0; i < checkboxes.size(); i++) {
+            if(i==1||i==3||i==5){
+                checkboxes.get(i).click();
+                js.executeScript("window.scroll(0,400)");
+                Thread.sleep(700);
+                //System.out.println(Rows.get(i));
             }
         }
-
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scroll(0,400)");
         Thread.sleep(1000);
-        Assertions.assertEquals(4,checkedCheckboxCount-1);
 
+        //7-) Click "Delete All" button.
+        WebElement deleteButton = driver.findElement(By.cssSelector(".btn.btn-danger.fs-4.text-white"));
+        deleteButton.click();
 
-
-
-
+        Thread.sleep(7000);
+        //8-) Verify the orders are deleted.
 
     }
 }

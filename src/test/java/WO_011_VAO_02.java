@@ -16,15 +16,15 @@ import java.util.List;
 2-) Click "WebOrder" button on top bar.
 3-) Enter valid username "Inar" and password "Academy".
 4-) Navigate to the view all order page.
-5-) Click "Add More Data" "4" times.
+5-) Click "Add More Data" "6" times.
 6-) Click "Check All" button.
 7-) Verify all orders selected.
+8-) Click "Uncheck All" button.
+9-) Verify all orders are unselected.
  */
-public class WO_010_VAO_01 extends Hooks{
-    List<String> orderInformation = new ArrayList<>();
-
+public class WO_011_VAO_02 extends Hooks{
     @Test
-    void testCheckAllFunctionalityInViewAllOrderPage() throws InterruptedException {
+    void testUncheckAllFunctionalityInViewAllOrderPage() throws InterruptedException {
         // 2-) Click "WebOrder" button on top bar.
         WebElement webOrderLink = driver.findElement(By.xpath("//a[@href='/weborder']"));
         webOrderLink.click();
@@ -48,12 +48,13 @@ public class WO_010_VAO_01 extends Hooks{
         WebElement orderTabLink = driver.findElement(By.cssSelector("#view-orders-tab > a"));
         orderTabLink.click();
 
-        //5-) Click "Add More Data" "4" times.
+        //5-) Click "Add More Data" "6" times.
         WebElement addMoreItemButton = driver.findElement(By.cssSelector(".fs-4.btn.btn-primary.text-fifth.me-3"));
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 6; i++) {
             addMoreItemButton.click();
-            Thread.sleep(1000);
         }
+        Thread.sleep(2000);
+
         //6-) Click "Check All" button.
         WebElement checkAllButton = driver.findElement(By.xpath("//button[@class='btn btn-success fs-4 text-fifth me-3']"));
         checkAllButton.click();
@@ -68,15 +69,25 @@ public class WO_010_VAO_01 extends Hooks{
                 checkedCheckboxCount++;
             }
         }
-
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scroll(0,400)");
         Thread.sleep(1000);
-        Assertions.assertEquals(4,checkedCheckboxCount-1);
+        Assertions.assertEquals(6,checkedCheckboxCount-1);
 
+        //8-) Click "Uncheck All" button.
+        WebElement uncheckAllButton = driver.findElement(By.xpath("//button[contains(@class,'btn btn-primary fs-4 text-fifth')]"));
+        uncheckAllButton.click();
+        Thread.sleep(2000);
 
-
-
+        //9-) Verify all orders are unselected.
+        checkedCheckboxCount = 0;
+        for (WebElement checkbox : checkboxes) {
+            if (checkbox.isSelected()) {
+                System.out.println(checkbox.getText());
+                checkedCheckboxCount++;
+            }
+        }
+        Assertions.assertEquals(0,checkedCheckboxCount-1);
 
 
     }
