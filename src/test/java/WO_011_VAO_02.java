@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
 /*
 1-) Open the URL
 2-) Click "WebOrder" button on top bar.
@@ -22,73 +23,76 @@ import java.util.List;
 8-) Click "Uncheck All" button.
 9-) Verify all orders are unselected.
  */
-public class WO_011_VAO_02 extends Hooks{
-    @Test
-    void testUncheckAllFunctionalityInViewAllOrderPage() throws InterruptedException {
-        // 2-) Click "WebOrder" button on top bar.
-        WebElement webOrderLink = driver.findElement(By.xpath("//a[@href='/weborder']"));
-        webOrderLink.click();
+public class WO_011_VAO_02 extends Hooks {
 
-        // 3-) Enter "Inar" as username and "Academy" password.
-        WebElement userNameInputField = driver.findElement(By.id("login-username-input"));
-        WebElement passwordInputField = driver.findElement(By.id("login-password-input"));
-        userNameInputField.sendKeys("Inar");
-        passwordInputField.sendKeys("Academy");
+	@Test
+	void testUncheckAllFunctionalityInViewAllOrderPage() throws InterruptedException {
+		// 2-) Click "WebOrder" button on top bar.
+		WebElement webOrderLink = driver.findElement(By.xpath("//a[@href='/weborder']"));
+		webOrderLink.click();
 
-        // Click on the "Login" button.
-        WebElement loginButton = driver.findElement(By.id("login-button"));
-        loginButton.click();
+		// 3-) Enter "Inar" as username and "Academy" password.
+		WebElement userNameInputField = driver.findElement(By.id("login-username-input"));
+		WebElement passwordInputField = driver.findElement(By.id("login-password-input"));
+		userNameInputField.sendKeys("Inar");
+		passwordInputField.sendKeys("Academy");
 
-        // Verify that the user is successfully logged in.
-        WebElement heading = driver.findElement(By.id("welcome-heading"));
-        String headingText = heading.getText();
-        Assertions.assertEquals("Welcome, Inar!", headingText);
+		// Click on the "Login" button.
+		WebElement loginButton = driver.findElement(By.id("login-button"));
+		loginButton.click();
 
-        //4-) Navigate to the view all order page.
-        WebElement orderTabLink = driver.findElement(By.cssSelector("#view-orders-tab > a"));
-        orderTabLink.click();
+		// Verify that the user is successfully logged in.
+		WebElement heading = driver.findElement(By.id("welcome-heading"));
+		String headingText = heading.getText();
+		Assertions.assertEquals("Welcome, Inar!", headingText);
 
-        //5-) Click "Add More Data" "6" times.
-        WebElement addMoreItemButton = driver.findElement(By.cssSelector(".fs-4.btn.btn-primary.text-fifth.me-3"));
-        for (int i = 0; i < 6; i++) {
-            addMoreItemButton.click();
-        }
-        Thread.sleep(2000);
+		// 4-) Navigate to the view all order page.
+		WebElement orderTabLink = driver.findElement(By.cssSelector("#view-orders-tab > a"));
+		orderTabLink.click();
 
-        //6-) Click "Check All" button.
-        WebElement checkAllButton = driver.findElement(By.xpath("//button[@class='btn btn-success fs-4 text-fifth me-3']"));
-        checkAllButton.click();
-        Thread.sleep(1000);
+		// 5-) Click "Add More Data" "6" times.
+		WebElement addMoreItemButton = driver.findElement(By.cssSelector(".fs-4.btn.btn-primary.text-fifth.me-3"));
+		for (int i = 0; i < 6; i++) {
+			addMoreItemButton.click();
+		}
+		Thread.sleep(2000);
 
-        //7-) Verify all orders selected.
-        List<WebElement> checkboxes = driver.findElements(By.cssSelector("input[type='checkbox']"));
-        int checkedCheckboxCount = 0;
-        for (WebElement checkbox : checkboxes) {
-            if (checkbox.isSelected()) {
-                System.out.println(checkbox.getText());
-                checkedCheckboxCount++;
-            }
-        }
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scroll(0,400)");
-        Thread.sleep(1000);
-        Assertions.assertEquals(6,checkedCheckboxCount-1);
+		// 6-) Click "Check All" button.
+		WebElement checkAllButton = driver
+			.findElement(By.xpath("//button[@class='btn btn-success fs-4 text-fifth me-3']"));
+		checkAllButton.click();
+		Thread.sleep(1000);
 
-        //8-) Click "Uncheck All" button.
-        WebElement uncheckAllButton = driver.findElement(By.xpath("//button[contains(@class,'btn btn-primary fs-4 text-fifth')]"));
-        uncheckAllButton.click();
-        Thread.sleep(2000);
+		// 7-) Verify all orders selected.
+		List<WebElement> checkboxes = driver.findElements(By.cssSelector("input[type='checkbox']"));
+		int checkedCheckboxCount = 0;
+		for (WebElement checkbox : checkboxes) {
+			if (checkbox.isSelected()) {
+				System.out.println(checkbox.getText());
+				checkedCheckboxCount++;
+			}
+		}
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scroll(0,400)");
+		Thread.sleep(1000);
+		Assertions.assertEquals(6, checkedCheckboxCount - 1);
 
-        //9-) Verify all orders are unselected.
-        checkedCheckboxCount = 0;
-        for (WebElement checkbox : checkboxes) {
-            if (checkbox.isSelected()) {
-                System.out.println(checkbox.getText());
-                checkedCheckboxCount++;
-            }
-        }
-        Assertions.assertEquals(0,checkedCheckboxCount-1);
+		// 8-) Click "Uncheck All" button.
+		WebElement uncheckAllButton = driver
+			.findElement(By.xpath("//button[contains(@class,'btn btn-primary fs-4 text-fifth')]"));
+		uncheckAllButton.click();
+		Thread.sleep(2000);
 
+		// 9-) Verify all orders are unselected.
+		checkedCheckboxCount = 0;
+		for (WebElement checkbox : checkboxes) {
+			if (checkbox.isSelected()) {
+				System.out.println(checkbox.getText());
+				checkedCheckboxCount++;
+			}
+		}
+		Assertions.assertEquals(0, checkedCheckboxCount - 1);
 
-    }
+	}
+
 }
