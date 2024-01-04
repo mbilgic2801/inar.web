@@ -6,32 +6,38 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
-
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 1-) Open the URL. 2-) Click "WebOrder" button on top bar. 3-) Enter valid username
- * "Inar" and password "Academy". 4-) Navigate to the order page. 5-) Select "MyMoney"
- * from Product dropdown. 6-) Enter "8" as quantity number. 7-) Enter "20" as discount
- * percentage. 8-) Click on the "Calculate" button. 9-) Enter "Inar Academy" as Name.
- * 10-)Enter "1100 Congress Ave" as Street. 11-) Enter "Austin" as City. 12-) Enter "TX"
- * State. 13-) Enter "78701" as Zip Code(number). 14-) Select "Visa" as Card Type. 15-)
- * Enter "4938281746192845" as Card Number. 16-) Enter "11/28" Expire Date(mm/yy format).
- * 17-) Click "Process"" button. 18-) Verify the confirmation message is displayed. 19-)
- * Navigate to view all orders page. 20-) Verify the order is successfully placed.
+/*
+1-) Open the URL.
+2-) Click "WebOrder" button on top bar.
+3-) Enter valid username "Inar" and password "Academy".
+4-) Navigate to the order page.
+5-) Select "MyMoney" from Product dropdown.
+6-) Enter "8" as quantity number.
+7-) Enter "20" as discount percentage.
+8-) Click on the "Calculate" button.
+9-) Enter "Inar Academy" as Name.
+10-) Enter "1100 Congress Ave" as Street.
+11-) Enter "Austin" as City.
+12-) Enter "TX" State.
+13-) Enter "92@#83" as Zip Code.
+14-) Select "American Express" as Card Type.
+15-) Enter "342738261027163" as Card Number.
+16-) Enter "01/28" Expire Date(mm/yy format).
+17-) Click "Process"" button.
+18-) Verify the invalid Zip Code error message is displayed.
  */
-public class WO_006_OP_01 extends Hooks {
-
-	// WebDriver driver = new ChromeDriver();
+public class WO_008_OP_03 extends Hooks {
 
 	List<String> orderInformation = new ArrayList<>();
 
 	@Test
-	void testSuccessfulOrderPlacement() throws InterruptedException {
+	void testOrderPlacementWithInvalidZipCode() throws InterruptedException {
 		// Name
 		orderInformation.add("Inar Academy");
 		// Prod name
@@ -47,14 +53,14 @@ public class WO_006_OP_01 extends Hooks {
 		// State
 		orderInformation.add("TX");
 		// Valid Zip code
-		orderInformation.add("78701");
+		orderInformation.add("92@#83");
 		// Valid Card Type
-		orderInformation.add("Visa");
+		orderInformation.add("amex");
 		// Valid Card Number (Visa starts with: 4, Mastercard starts with: 5, American
 		// Express starts with: 34, 37.)
-		orderInformation.add("4938281746192845");
+		orderInformation.add("342738261027163");
 		// Valid Card Expire Date (format must be mm/yy)
-		orderInformation.add("11/28");
+		orderInformation.add("01/28");
 
 		// 2-) Click "WebOrder" button on top bar.
 		WebElement webOrderLink = driver.findElement(By.xpath("//a[@href='/weborder']"));
@@ -116,7 +122,7 @@ public class WO_006_OP_01 extends Hooks {
 		Thread.sleep(2000);
 
 		// 14,15,16-) Enter payment info
-		WebElement visaCheckbox = driver.findElement(By.id("visa"));
+		WebElement visaCheckbox = driver.findElement(By.id("amex"));
 		visaCheckbox.click();
 
 		WebElement cardNumberField = driver.findElement(By.id("cardNumber"));
@@ -130,30 +136,11 @@ public class WO_006_OP_01 extends Hooks {
 		processButton.click();
 		Thread.sleep(5000);
 
-		// 18-) verify confirmation message
-		WebElement confirmationElement = driver.findElement(By.cssSelector("div[role='alert']"));
-		String message = confirmationElement.getText();
-		String expectedMsg = "New order has been successfully added.";
-		Assertions.assertEquals(expectedMsg, message, "Confirmation Message is wrong!");
-
-		// Actions actions = new Actions(driver);
-		// actions.keyDown(Keys.PAGE_UP).release().build().perform();
-		js.executeScript("window.scroll(0,-1000)");
-		Thread.sleep(1000);
-
-		// Navigate to view all orders page.
-		WebElement viewAllOrderLink = driver.findElement(By.cssSelector("#view-orders-tab > a"));
-		viewAllOrderLink.click();
-
-		// Verify the order is successfully placed.
-		List<WebElement> tableRows = driver.findElements(By.cssSelector("tbody > tr"));
-		List<WebElement> columnValuesInLastRow = tableRows.get(tableRows.size() - 1).findElements(By.xpath("td"));
-		Thread.sleep(3000);
-		for (int i = 0; orderInformation.size() > i; i++) {
-			String expectedValue = orderInformation.get(i);
-			String actualValue = columnValuesInLastRow.get(i + 1).getText();
-			Assertions.assertEquals(expectedValue, actualValue, "Wrong Order Information");
-		}
+		// 18-) Verify the invalid Zip Code error message is displayed.
+		WebElement messageText = driver.findElement(By.cssSelector("div[role='alert']"));
+		String strOfText = messageText.getText();
+		assert !strOfText.equals("New order has been successfully added.")
+				: ("The order has been listed with an invalid ZIP code");
 
 	}
 

@@ -1,9 +1,13 @@
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+import java.time.Duration;
 
 /**
  * This class contains setup and teardown methods for WebDriver initialization and
@@ -42,6 +46,18 @@ public class Hooks {
 			driver.navigate().refresh();
 			Thread.sleep(1000);
 		}
+	}
+
+	@BeforeEach
+	void setUp() {
+
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(7));
+
+	}
+
+	@AfterEach
+	void tearDown() {
+		driver.quit();
 	}
 
 	/**
