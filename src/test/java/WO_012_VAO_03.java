@@ -58,7 +58,12 @@ public class WO_012_VAO_03 extends Hooks{
 
         //6-) Click 1st, 3rd and 5th orders checkbox's.
         List<WebElement> checkboxes = driver.findElements(By.cssSelector("input[type='checkbox']"));
-        List<WebElement> Rows = driver.findElements(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[12]/span[1]"));
+        //List<WebElement> Rows = driver.findElements(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[12]/span[1]"));
+        List<WebElement> tableRows = driver.findElements(By.cssSelector("tbody > tr"));
+        List<WebElement> columnValuesInFirstRow = tableRows.get(1).findElements(By.xpath("td"));
+        List<WebElement> columnValuesInThirdRow = tableRows.get(2).findElements(By.xpath("td"));
+        List<WebElement> columnValuesInFifthRow = tableRows.get(5).findElements(By.xpath("td"));
+
 
         for (int i = 0; i < checkboxes.size(); i++) {
             if(i==1||i==3||i==5){
@@ -74,8 +79,19 @@ public class WO_012_VAO_03 extends Hooks{
         WebElement deleteButton = driver.findElement(By.cssSelector(".btn.btn-danger.fs-4.text-white"));
         deleteButton.click();
 
-        Thread.sleep(7000);
+        Thread.sleep(3000);
         //8-) Verify the orders are deleted.
+        boolean isDeleted = rowDeleted(columnValuesInFirstRow)||rowDeleted(columnValuesInThirdRow)||rowDeleted(columnValuesInFifthRow);
+        Assertions.assertTrue(isDeleted);
 
+    }
+
+    private boolean rowDeleted(List<WebElement> columnValuesInFirstRow) {
+        List<WebElement> tableRows = driver.findElements(By.cssSelector("tbody > tr"));
+        for (int i = 0; i < tableRows.size(); i++) {
+            if(columnValuesInFirstRow.equals(tableRows.get(i).findElements(By.xpath("td"))))
+                return false;
+        }
+        return true;
     }
 }
