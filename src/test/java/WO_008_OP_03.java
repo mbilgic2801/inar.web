@@ -134,7 +134,6 @@ public class WO_008_OP_03 extends Hooks {
 		// 17-) click on "process" button
 		WebElement processButton = driver.findElement(By.xpath("//button[text()='Process']"));
 		processButton.click();
-		Thread.sleep(5000);
 
 		// 18-) Verify the invalid Zip Code error message is displayed.
 		WebElement messageText = driver.findElement(By.cssSelector("div[role='alert']"));

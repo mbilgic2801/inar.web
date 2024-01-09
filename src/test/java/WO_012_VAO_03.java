@@ -64,7 +64,7 @@ public class WO_012_VAO_03 extends Hooks {
 		// driver.findElements(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[12]/span[1]"));
 		List<WebElement> tableRows = driver.findElements(By.cssSelector("tbody > tr"));
 		List<WebElement> columnValuesInFirstRow = tableRows.get(1).findElements(By.xpath("td"));
-		List<WebElement> columnValuesInThirdRow = tableRows.get(2).findElements(By.xpath("td"));
+		List<WebElement> columnValuesInThirdRow = tableRows.get(3).findElements(By.xpath("td"));
 		List<WebElement> columnValuesInFifthRow = tableRows.get(5).findElements(By.xpath("td"));
 
 		for (int i = 0; i < checkboxes.size(); i++) {

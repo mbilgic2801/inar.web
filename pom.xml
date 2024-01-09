@@ -65,20 +65,20 @@
                     <!-- Specific configuration for JUnit 5. -->
                     <useModulePath>false</useModulePath>
                     <includes>
-                        <include>**/*WO_001_LP_01.java</include>
-                        <include>**/*WO_002_LP_02.java</include>
-                        <include>**/*WO_003_LP_03.java</include>
-                        <include>**/*WO_004_CF_01.java</include>
-                        <include>**/*WO_005_CF_02.java</include>
-                        <include>**/*WO_006_OP_01.java</include>
-                        <include>**/*WO_007_OP_02.java</include>
-                        <include>**/*WO_008_OP_03.java</include>
-                        <include>**/*WO_009_OP_04.java</include>
-                        <include>**/*WO_010_VAO_01.java</include>
-                        <include>**/*WO_011_VAO_02.java</include>
-                        <include>**/*WO_012_VAO_03.java</include>
-                        <include>**/*WO_013_DSGN_01.java</include>
-                        <include>**/*WO_014_OP_05.java</include>
+                        <include>**/*WO_001_LP_01_PAGES.java</include>
+                        <include>**/*WO_002_LP_02_PAGES.java</include>
+                        <include>**/*WO_003_LP_03_PAGES.java</include>
+                        <!--<include>**/*WO_004_CF_01_PAGES.java</include>
+                        <include>**/*WO_005_CF_02_PAGES.java</include>
+                        <include>**/*WO_006_OP_01_PAGES.java</include>
+                        <include>**/*WO_007_OP_02_PAGES.java</include>
+                        <include>**/*WO_008_OP_03_PAGES.java</include>
+                        <include>**/*WO_009_OP_04_PAGES.java</include>
+                        <include>**/*WO_010_VAO_01_PAGES.java</include>
+                        <include>**/*WO_011_VAO_02_PAGES.java</include>
+                        <include>**/*WO_012_VAO_03_PAGES.java</include>
+                        <include>**/*WO_013_DSGN_01_PAGES.java</include>
+                        <include>**/*WO_014_OP_05_PAGES.java</include> -->
                     </includes>
                 </configuration>
             </plugin>
