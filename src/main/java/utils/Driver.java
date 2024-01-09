@@ -14,7 +14,7 @@ public class Driver {
 		throw new UnsupportedOperationException("Cannot instantiate utility class");
 	}
 
-	public static WebDriver getDriver() throws InterruptedException {
+	public synchronized static WebDriver getDriver() {
 		if (DRIVER_THREAD_LOCAL.get() == null) {
 			WebDriver driver;
 			String browserType = "Chrome";
@@ -25,14 +25,32 @@ public class Driver {
 			};
 			driver.manage().window().maximize();
 			driver.get("https://InarAcademy:Fk160621.@test.inar-academy.com");
-			Thread.sleep(1000);
+			try {
+				Thread.sleep(1000);
+			}
+			catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
 			if (browserType.equalsIgnoreCase("firefox")) {
 				driver.navigate().refresh();
-				Thread.sleep(1000);
+				try {
+					Thread.sleep(1000);
+				}
+				catch (InterruptedException e) {
+					throw new RuntimeException(e);
+				}
 			}
 			DRIVER_THREAD_LOCAL.set(driver);
 		}
 		return DRIVER_THREAD_LOCAL.get();
+	}
+
+	public static void closeDriver() {
+		WebDriver currentDriver = DRIVER_THREAD_LOCAL.get();
+		if (currentDriver != null) {
+			currentDriver.quit();
+			DRIVER_THREAD_LOCAL.remove();
+		}
 	}
 
 }

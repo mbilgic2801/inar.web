@@ -16,7 +16,7 @@ public class WebOrderLoginPage extends BasePage {
 	@FindBy(id = "login-button")
 	private WebElement loginButton;
 
-	public WebOrderLoginPage() throws InterruptedException {
+	public WebOrderLoginPage() {
 		super();
 	}
 

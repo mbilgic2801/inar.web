@@ -66,7 +66,7 @@ public class OrderPage extends BasePage {
 		enterExpiryDate(expiryDate);
 	}
 
-	public OrderPage() throws InterruptedException {
+	public OrderPage() {
 		super();
 	}
 

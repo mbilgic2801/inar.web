@@ -17,7 +17,7 @@ import utils.Driver;
 public class WO_001_LP_01_PAGES extends Hooks_PAGES {
 
 	@Test
-	void testLoginFunctionalityUsingValidCredentials() throws InterruptedException {
+	void testLoginFunctionalityUsingValidCredentials() {
 		HomePage homePage = new HomePage();
 		homePage.clickOnWebOrderLink();
 		WebOrderLoginPage webOrderLoginPage = new WebOrderLoginPage();

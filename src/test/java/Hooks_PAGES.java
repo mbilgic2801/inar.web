@@ -8,19 +8,13 @@ import utils.Driver;
 public class Hooks_PAGES {
 
 	@BeforeAll
-	public static void setupTestEnvironment() throws InterruptedException {
-		Thread.sleep(2000);
+	public static void setupTestEnvironment() {
 		Driver.getDriver();
 	}
 
 	@AfterAll
-	public static void tearDownTestEnvironment() throws InterruptedException {
-		if (Driver.getDriver() != null) {
-
-			Driver.getDriver().quit();
-			Thread.sleep(2000);
-
-		}
+	public static void tearDownTestEnvironment() {
+		Driver.closeDriver();
 	}
 
 }

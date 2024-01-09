@@ -24,7 +24,7 @@ public class ViewAllOrdersPage extends BasePage {
 	@FindBy(css = ".btn.btn-danger.fs-4.text-white")
 	private WebElement deleteButton;
 
-	public ViewAllOrdersPage() throws InterruptedException {
+	public ViewAllOrdersPage() {
 		super();
 	}
 

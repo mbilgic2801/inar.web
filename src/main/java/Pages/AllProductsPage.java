@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 public class AllProductsPage extends BasePage {
 
-	public AllProductsPage() throws InterruptedException {
+	public AllProductsPage() {
 		super();
 	}
 

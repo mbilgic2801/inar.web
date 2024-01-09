@@ -8,16 +8,16 @@ import org.openqa.selenium.WebElement;
 import utils.Driver;
 
 /*
-1-) Open the URL
-2-) Click "WebOrder" button on top bar.
-3-) Enter valid username "Inar" and password "Academy".
-4-) Click "Logout" button.
+//1-) Open the URL
+//2-) Click "WebOrder" button on top bar.
+//3-) Enter valid username "Inar" and password "Academy".
+//4-) Click "Logout" button.
 5-) Verify logout successfully.
  */
 public class WO_003_LP_03_PAGES extends Hooks_PAGES {
 
 	@Test
-	void testTheLogoutFunctionality() throws InterruptedException {
+	void testTheLogoutFunctionality() {
 		HomePage homePage = new HomePage();
 		homePage.clickOnWebOrderLink();
 		WebOrderLoginPage webOrderLoginPage = new WebOrderLoginPage();

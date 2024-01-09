@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 public class WO_004_CF_01_PAGES extends Hooks_PAGES {
 
 	@Test
-	void testTheFunctionalityOfCalculating() throws InterruptedException {
+	void testTheFunctionalityOfCalculating() {
 		HomePage homePage = new HomePage();
 		homePage.clickOnWebOrderLink();
 		WebOrderLoginPage webOrderLoginPage = new WebOrderLoginPage();

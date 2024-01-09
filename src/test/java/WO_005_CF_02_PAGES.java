@@ -22,7 +22,7 @@ import utils.Driver;
 public class WO_005_CF_02_PAGES extends Hooks_PAGES {
 
 	@Test
-	void testCalculatingFunctionalityInOrderPageWhenEntersInvalidInput() throws InterruptedException {
+	void testCalculatingFunctionalityInOrderPageWhenEntersInvalidInput() {
 		HomePage homePage = new HomePage();
 		homePage.clickOnWebOrderLink();
 		WebOrderLoginPage webOrderLoginPage = new WebOrderLoginPage();

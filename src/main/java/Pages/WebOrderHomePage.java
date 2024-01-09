@@ -22,7 +22,7 @@ public class WebOrderHomePage extends BasePage {
 	@FindBy(xpath = "//div[@class='react-switch-bg']")
 	private WebElement themeSwitchButton;
 
-	public WebOrderHomePage() throws InterruptedException {
+	public WebOrderHomePage() {
 		super();
 	}
 
